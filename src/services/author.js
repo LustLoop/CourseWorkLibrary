@@ -7,7 +7,7 @@ const addAuthor = (name) => {
 }
 
 const getAuthor = () => {
-    return Author.find().populate('books');
+    return Author.find();
 }
 
 module.exports = {

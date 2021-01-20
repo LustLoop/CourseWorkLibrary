@@ -11,7 +11,7 @@ const getBooks = (req, res, next) => {
 }
 
 const addBook = (req, res, next) => {
-    bookService.addBook(req.body.title, req.body.author, true)
+    bookService.addBook(req.body.title, req.body.author, req.body.genre, true)
         .then((book) => {
             res.status(201).send(book);
         })
