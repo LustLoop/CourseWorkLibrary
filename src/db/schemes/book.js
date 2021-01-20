@@ -6,10 +6,15 @@ mongoose.set('useCreateIndex', true);
 const bookScheme = new mongoose.Schema({
     title: {
         type: String,
+        required: true,
     },
     author: {
         type: Schema.Types.ObjectId,
         ref: 'Author',
+    },
+    genre: {
+        type: Schema.Types.ObjectId,
+        ref: 'Genre',
     },
     availability: {
         type: Boolean,
