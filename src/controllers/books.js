@@ -10,6 +10,16 @@ const getBooks = (req, res, next) => {
         })
 }
 
+const getOfGenre = (req, res, next) => {
+    bookService.getBooksOfGenre(req.params.id)
+        .then((data) => {
+            res.status(200).send(data);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+}
+
 const addBook = (req, res, next) => {
     bookService.addBook(req.body.title, req.body.author, req.body.genre, true)
         .then((book) => {
@@ -24,4 +34,5 @@ const addBook = (req, res, next) => {
 module.exports = {
     getBooks,
     addBook,
+    getOfGenre
 };

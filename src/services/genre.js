@@ -10,6 +10,10 @@ const getGenres = () => {
     return Genre.find();
 }
 
+const getGenreById = (id) => {
+    return Genre.findOne({'_id': id});
+}
+
 module.exports = {
     addGenre,
     getGenres,

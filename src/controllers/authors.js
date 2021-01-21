@@ -11,7 +11,7 @@ const getAuthors = (req, res, next) => {
 }
 
 const addAuthor = (req, res, next) => {
-    authorService.addAuthor(req.body.title, req.body.author, true)
+    authorService.addAuthor(req.body.name)
         .then((author) => {
             res.status(201).send(author);
         })
