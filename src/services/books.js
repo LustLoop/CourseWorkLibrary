@@ -1,7 +1,7 @@
 const Book = require('../db/schemes/book');
 
-const addBook = (title, author, genre, availability) => {
-    return new Book({title, author, genre, availability}).save();
+const addBook = (title, description, rating, author, genre, availability) => {
+    return new Book({title, description, rating, author, genre, availability}).save();
 }
 
 const getBooks = () => {

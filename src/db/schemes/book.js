@@ -8,6 +8,12 @@ const bookScheme = new mongoose.Schema({
         type: String,
         required: true,
     },
+    description: {
+        type: String,
+    },
+    rating: {
+        type: Number,
+    },
     author: {
         type: Schema.Types.ObjectId,
         ref: 'Author',
@@ -16,9 +22,9 @@ const bookScheme = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'Genre',
     },
-    availability: {
+    available: {
         type: Boolean,
-    }
+    },
 });
 
 const Book = mongoose.model('Book', bookScheme);
