@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 
 require('./db/config');
+require('./fixtures');
 require('./middlewares')(app);
 require('./routes')(app);
 
