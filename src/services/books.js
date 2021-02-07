@@ -9,7 +9,27 @@ const getBooks = () => {
 }
 
 const getFewBooks = (page) => {
-    return Book.find().skip(page * 2)
+    return Book.find().skip((page - 1) * 2).limit(2).populate('author').populate('genre');
+}
+
+const getFewFilteredBooks = (page, available, genre) => {
+    if (available === "true") {
+        if (genre) {
+            return Book
+                .find({available: true, genre: genre})
+                .skip((page - 1) * 2).limit(2)
+                .populate('author').populate('genre')
+        }
+        return Book.find({available: true}).skip((page - 1) * 2).limit(2)
+    }
+    if (genre) {
+        return Book
+            .find({genre: genre})
+            .skip((page - 1) * 2)
+            .limit(2)
+            .populate('author').populate('genre')
+    }
+    return Book.find().skip((page - 1) * 2).limit(2).populate('author').populate('genre');
 }
 
 const getBooksOfGenre = (genreId) => {
@@ -20,5 +40,6 @@ module.exports = {
     addBook,
     getBooks,
     getBooksOfGenre,
-    getFewBooks
+    getFewBooks,
+    getFewFilteredBooks
 }
