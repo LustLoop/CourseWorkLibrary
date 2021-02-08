@@ -12,23 +12,28 @@ const getFewBooks = (page) => {
     return Book.find().skip((page - 1) * 2).limit(2).populate('author').populate('genre');
 }
 
-const getFewFilteredBooks = (page, available, genre) => {
+const getFewFilteredBooks = (page, available, genres) => {
     if (available === "true") {
-        if (genre) {
+        if (genres) {
+            console.log(1)
+            console.log(genres)
             return Book
-                .find({available: true, genre: genre})
+                .find({available: true, genre: genres})
                 .skip((page - 1) * 2).limit(2)
                 .populate('author').populate('genre')
         }
+        console.log(2)
         return Book.find({available: true}).skip((page - 1) * 2).limit(2)
     }
-    if (genre) {
+    if (genres) {
+        console.log(3)
         return Book
-            .find({genre: genre})
+            .find({genre: genres})
             .skip((page - 1) * 2)
             .limit(2)
             .populate('author').populate('genre')
     }
+    console.log(4)
     return Book.find().skip((page - 1) * 2).limit(2).populate('author').populate('genre');
 }
 
