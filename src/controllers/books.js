@@ -11,7 +11,27 @@ const getBooks = (req, res, next) => {
 }
 
 const getOfGenre = (req, res, next) => {
-    bookService.getBooksOfGenre(req.params.id)
+    bookService.getBooksOfGenre(req.query.page)
+        .then((data) => {
+            res.status(200).send(data);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+}
+
+const getBooksOfPage = (req, res, next) => {
+    bookService.getBooksOfPage(req.query.page)
+        .then((data) => {
+            res.status(200).send(data);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+}
+
+const getFilteredBooksOfPage = (req, res, next) => {
+    bookService.getFilteredBooksOfPage(req.query.page, req.query.available, req.query.genres)
         .then((data) => {
             res.status(200).send(data);
         })
@@ -21,7 +41,7 @@ const getOfGenre = (req, res, next) => {
 }
 
 const addBook = (req, res, next) => {
-    bookService.addBook(req.body.title, req.body.description, req.body.rating, req.body.author, req.body.genre, true)
+    bookService.addBook(req.body.title, req.body.description, req.body.rating, req.body.author, req.body.genre, req.body.available)
         .then((book) => {
             res.status(201).send(book);
         })
@@ -34,5 +54,7 @@ const addBook = (req, res, next) => {
 module.exports = {
     getBooks,
     addBook,
-    getOfGenre
+    getBooksOfPage,
+    getOfGenre,
+    getFilteredBooksOfPage
 };
