@@ -13,7 +13,7 @@ function populate() {
         "This book describing history of art from ancient ages till nowadays",
         "6",
         "60111035a255380931f892e1",
-        "6011104da255380931f892e3",
+        ["6011104da255380931f892e3"],
         false
     )
     addBook(
@@ -22,7 +22,7 @@ function populate() {
             "Conan Doyle. Referring to himself as a consulting detective in the stories",
        8,
         "60111035a255380931f892e1",
-        "60111058a255380931f892e4",
+        ["60111058a255380931f892e4"],
         false,
     );
     addBook(
@@ -33,7 +33,7 @@ function populate() {
             "dolore eu fugiat nulla pariatur.",
        9,
         "60111045a255380931f892e2",
-        "6011104da255380931f892e3",
+        ["6011104da255380931f892e3"],
         true,
     );
     addBook(
@@ -41,7 +41,16 @@ function populate() {
         "Something something something something something something.",
        2,
         "60111045a255380931f892e2",
-        "6011104da255380931f892e3",
+        ["6011104da255380931f892e3"],
+        true,
+    );
+    addBook(
+        "Strange book",
+        "This book is just strange. It's telling story about two detectives investigating the murder, but it's" +
+        " hard to tell if it's story is real or just fiction",
+        7,
+        "60111045a255380931f892e2",
+        ["6011104da255380931f892e3", "60111058a255380931f892e4"],
         true,
     );
 }

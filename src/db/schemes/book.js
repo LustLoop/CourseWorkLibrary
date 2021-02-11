@@ -18,10 +18,10 @@ const bookScheme = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'Author',
     },
-    genre: {
+    genres: [{
         type: Schema.Types.ObjectId,
         ref: 'Genre',
-    },
+    }],
     available: {
         type: Boolean,
     },

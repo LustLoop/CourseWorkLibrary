@@ -1,40 +1,31 @@
 const Book = require('../db/schemes/book');
 
-const addBook = (title, description, rating, author, genre, available) => {
-    return new Book({title, description, rating, author, genre, available}).save()
+const getBooksToSkip = (page) => {
+    return (page - 1) * 2;
+}
+
+const addBook = (title, description, rating, author, genres, available) => {
+    return new Book({title, description, rating, author, genres, available}).save()
 }
 
 const getBooks = () => {
-    return Book.find().populate('author').populate('genre');
+    return Book.find().populate('author').populate('genres');
 }
 
-const getFewBooks = (page) => {
-    return Book.find().skip((page - 1) * 2).limit(2).populate('author').populate('genre');
+const getBooksOfPage = (page) => {
+    return Book.find().skip(getBooksToSkip(page)).populate('author').populate('genres');
 }
 
-const getFewFilteredBooks = (page, available, genres) => {
+const getFilteredBooksOfPage = (page, available, genres) => {
+    let filteredBooks = Book.find();
     if (available === "true") {
-        if (genres) {
-            console.log(1)
-            console.log(genres)
-            return Book
-                .find({available: true, genre: genres})
-                .skip((page - 1) * 2).limit(2)
-                .populate('author').populate('genre')
-        }
-        console.log(2)
-        return Book.find({available: true}).skip((page - 1) * 2).limit(2)
+        filteredBooks = filteredBooks.find({available: true});
     }
     if (genres) {
-        console.log(3)
-        return Book
-            .find({genre: genres})
-            .skip((page - 1) * 2)
-            .limit(2)
-            .populate('author').populate('genre')
+        filteredBooks = filteredBooks.find({genres: genres});
+        // filteredBooks = filteredBooks.filter(book => book.genres.some(genre => genres.includes(genre)));
     }
-    console.log(4)
-    return Book.find().skip((page - 1) * 2).limit(2).populate('author').populate('genre');
+    return filteredBooks.populate('author').populate('genres');
 }
 
 const getBooksOfGenre = (genreId) => {
@@ -45,6 +36,6 @@ module.exports = {
     addBook,
     getBooks,
     getBooksOfGenre,
-    getFewBooks,
-    getFewFilteredBooks
+    getFewBooks: getBooksOfPage,
+    getFewFilteredBooks: getFilteredBooksOfPage
 }
