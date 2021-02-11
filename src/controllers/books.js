@@ -11,7 +11,7 @@ const getBooks = (req, res, next) => {
 }
 
 const getOfGenre = (req, res, next) => {
-    bookService.getBooksOfGenre(req.params.id)
+    bookService.getBooksOfGenre(req.query.page)
         .then((data) => {
             res.status(200).send(data);
         })
@@ -20,8 +20,8 @@ const getOfGenre = (req, res, next) => {
         })
 }
 
-const getSetOfBooks = (req, res, next) => {
-    bookService.getFewBooks(req.params.id)
+const getBooksOfPage = (req, res, next) => {
+    bookService.getBooksOfPage(req.query.page)
         .then((data) => {
             res.status(200).send(data);
         })
@@ -30,8 +30,8 @@ const getSetOfBooks = (req, res, next) => {
         })
 }
 
-const getFilteredSetOfBooks = (req, res, next) => {
-    bookService.getFewFilteredBooks(req.params.id, req.query.available, req.query.genres)
+const getFilteredBooksOfPage = (req, res, next) => {
+    bookService.getFilteredBooksOfPage(req.query.page, req.query.available, req.query.genres)
         .then((data) => {
             res.status(200).send(data);
         })
@@ -54,7 +54,7 @@ const addBook = (req, res, next) => {
 module.exports = {
     getBooks,
     addBook,
-    getSetOfBooks,
+    getBooksOfPage,
     getOfGenre,
-    getFilteredSetOfBooks
+    getFilteredBooksOfPage
 };

@@ -13,7 +13,7 @@ const getBooks = () => {
 }
 
 const getBooksOfPage = (page) => {
-    return Book.find().skip(getBooksToSkip(page)).populate('author').populate('genres');
+    return Book.find().skip(getBooksToSkip(page)).limit(2).populate('author').populate('genres');
 }
 
 const getFilteredBooksOfPage = (page, available, genres) => {
@@ -25,7 +25,7 @@ const getFilteredBooksOfPage = (page, available, genres) => {
         filteredBooks = filteredBooks.find({genres: genres});
         // filteredBooks = filteredBooks.filter(book => book.genres.some(genre => genres.includes(genre)));
     }
-    return filteredBooks.populate('author').populate('genres');
+    return filteredBooks.skip(getBooksToSkip(page)).limit(2).populate('author').populate('genres');
 }
 
 const getBooksOfGenre = (genreId) => {
@@ -36,6 +36,6 @@ module.exports = {
     addBook,
     getBooks,
     getBooksOfGenre,
-    getFewBooks: getBooksOfPage,
-    getFewFilteredBooks: getFilteredBooksOfPage
+    getBooksOfPage,
+    getFilteredBooksOfPage
 }
